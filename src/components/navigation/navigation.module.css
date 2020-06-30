@@ -1,0 +1,27 @@
+.nav {
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.navList {
+  display: flex;
+  padding: 10px;
+  max-width: 1170px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.navList > li:not(:last-of-type) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navLink {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+.navLinkActive {
+  color: tomato;
+}
