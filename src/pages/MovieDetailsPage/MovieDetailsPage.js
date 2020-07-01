@@ -4,6 +4,7 @@ const MovieDetailsPage = () => {
     return (
         <main>
             <h2>MovieDetailsPage</h2>
+            
         </main>
     )
 }

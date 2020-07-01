@@ -5,35 +5,39 @@ import MoviesList from '../../components/moviesList/MoviesList';
 class HomePage extends Component {
   state = {
     trendingMovies: [],
-    page: 1,
   };
 
   componentDidMount() {
-     this.fetchTrebdingMovies()
+    this.fetchTrendingMovies();
   }
 
-  fetchTrebdingMovies = () => {
+  componentWillMount() {
     services
-      .fetchTrendingMovies(this.state.page)
+    .fetchTrendingMovies()
+    .then(trendingMovies => console.log(trendingMovies))
+  }
+
+  fetchTrendingMovies = () => {
+    services
+      .fetchTrendingMovies()
       .then(trendingMovies =>
         this.setState(prev => ({
           trendingMovies: [...prev.trendingMovies, ...trendingMovies],
-          page: prev.page + 1,
         })),
       )
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   };
 
   render() {
-    const {trendingMovies} = this.state
+    const { trendingMovies } = this.state;
     return (
-        <>
+      <>
         <h2 className="trending-title">Trending today</h2>;
         {trendingMovies && (
-            <MoviesList moviesList={this.state.trendingMovies}/>
+          <MoviesList moviesList={this.state.trendingMovies} />
         )}
-        </>
-    )
+      </>
+    );
   }
 }
 
