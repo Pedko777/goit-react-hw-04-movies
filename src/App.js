@@ -4,6 +4,8 @@ import routes from './routes';
 import Layout from "./components/layout/Layout"
 import HomePage from "./pages/HomePage/HomePage"
 import MoviesPage from './pages/MoviesPage/MoviesPage'
+import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage'
+
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
         <Suspense>
           <Switch>
             <Route path={routes.home} exact component={HomePage} />
+            <Route path={routes.movieDetails} component={MovieDetailsPage}/>
             <Route path={routes.movies} component={MoviesPage} />
             <Redirect to={routes.home}/>
           </Switch>
