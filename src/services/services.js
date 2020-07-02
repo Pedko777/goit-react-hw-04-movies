@@ -20,4 +20,17 @@ const fetchMoviesDetails = (id) => {
   );
 };
 
-export default { fetchTrendingMovies, fetchMoviesWithQuery, fetchMoviesDetails };
+const fetchMovieCast = id => {
+  return axios(`/movie/${id}/credits?api_key=${apiKey}`).then(
+    response => response.data.cast,
+  );
+};
+
+const fetchMovieReviews = id => {
+  return axios(`/movie/${id}/reviews?api_key=${apiKey}`).then(
+    response => response.data.results,
+  );
+};
+
+
+export default { fetchTrendingMovies, fetchMoviesWithQuery, fetchMoviesDetails, fetchMovieCast, fetchMovieReviews };

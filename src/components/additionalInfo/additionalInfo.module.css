@@ -1,0 +1,7 @@
+.additionalLinkContainer {
+display: flex;
+}
+
+.additionalLink:not(:last-child) {
+    margin-right: 20px;
+}

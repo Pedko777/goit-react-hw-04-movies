@@ -2,13 +2,17 @@ import React from 'react';
 import styles from './movieDetails.module.css';
 
 const { movieContainer, movieImg } = styles;
+const noImgUrl = 'http://www.quickmeme.com/img/a8/a8022006b463b5ed9be5a62f1bdbac43b4f3dbd5c6b3bb44707fe5f5e26635b0.jpg';
 
 const MovieDetails = ({ movie }) => {
   return (
     <div className={movieContainer}>
       <div className={movieImg}>
         <img
-          src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+          src={movie.poster_path 
+            ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+            : `${noImgUrl}`}
+
           alt={movie.original_title}
           width={380}
         />
