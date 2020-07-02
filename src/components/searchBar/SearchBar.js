@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styles from './searchBar.module.css';
 
 const {
-    Searchbar,
-    SearchForm,
-    SearchFormButton,
-    SearchFormButtonLabel,
-    SearchFormInput,
-  } = styles;
+  Searchbar,
+  SearchForm,
+  SearchFormButton,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} = styles;
 
 class SearchBar extends Component {
   state = {
@@ -20,12 +20,8 @@ class SearchBar extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    const {inputValue} = this.state;
-    if (inputValue.trim()) {
-        this.props.onSubmit(inputValue)
-    }
-    this.setState({inputValue: ""})
+    this.props.onSubmit(this.state.inputValue);
+    this.setState({ inputValue: '' });
   };
 
   render() {

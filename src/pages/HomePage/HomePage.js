@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import services from '../../services/services';
+import styles from "./homePage.module.css"
 import MoviesList from '../../components/moviesList/MoviesList';
 
 class HomePage extends Component {
@@ -8,31 +9,18 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    this.fetchTrendingMovies();
-  }
-
-  componentWillMount() {
     services
     .fetchTrendingMovies()
-    .then(trendingMovies => console.log(trendingMovies))
+    .then(res=> this.setState({trendingMovies: res}))
+    .catch(error => console.log(error));
   }
 
-  fetchTrendingMovies = () => {
-    services
-      .fetchTrendingMovies()
-      .then(trendingMovies =>
-        this.setState(prev => ({
-          trendingMovies: [...prev.trendingMovies, ...trendingMovies],
-        })),
-      )
-      .catch(error => console.log(error));
-  };
 
   render() {
     const { trendingMovies } = this.state;
     return (
       <>
-        <h2 className="trending-title">Trending today</h2>;
+        <h2 className={styles.trendingTitle}>Trending today</h2>;
         {trendingMovies && (
           <MoviesList moviesList={this.state.trendingMovies} />
         )}

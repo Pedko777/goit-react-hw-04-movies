@@ -34,12 +34,9 @@ class MoviesPage extends Component {
     if (searchQuery) {
       services
         .fetchMoviesWithQuery(searchQuery)
-        .then(filmList =>
-          this.setState(prev => ({
-            filmList: [...prev.filmList, ...filmList],
-          })),
+        .then(res=> this.setState({filmList: res})
         )
-        .catch(error => this.setState({ error }));
+        .catch(error => console.log(error));
     }
   };
 
