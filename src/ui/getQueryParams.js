@@ -1,7 +1,7 @@
 import queryString from "query-string";
 
-const getSearchQueryParams = (qs) => {
+const getQueryParams = (qs) => {
     return queryString.parse(qs);
 }
 
-export default getSearchQueryParams;
+export default getQueryParams;

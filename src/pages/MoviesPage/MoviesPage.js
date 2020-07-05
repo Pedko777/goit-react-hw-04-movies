@@ -1,49 +1,47 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/searchBar/SearchBar';
 import MoviesList from '../../components/moviesList/MoviesList';
-import getSearchQueryParams from '../../ui/searchQueryParams';
+import getQueryParams from '../../ui/getQueryParams';
 import services from '../../services/services';
 
 class MoviesPage extends Component {
   state = {
+    searchQuery: '',
     filmList: [],
   };
 
   componentDidMount() {
-    const { searchQuery } = getSearchQueryParams(this.props.location.search);
-    if (searchQuery) {
-      return this.fetchWithQuery(searchQuery);
+    const { query } = getQueryParams(this.props.location.search);
+    if (query) {
+      return this.fetchWithQuery(query);
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchQuery: prevQuery } = getSearchQueryParams(
-      prevProps.location.search,
+    const { query: prevQuery } = getQueryParams(prevProps.location.search,
     );
-    const { searchQuery: nextQuery } = getSearchQueryParams(
-      this.props.location.search,
+    const { query: nextQuery } = getQueryParams(this.props.location.search,
     );
 
     if (prevQuery !== nextQuery) {
-      this.setState({ filmList: [] });
-      this.fetchWithQuery(nextQuery);
+       this.fetchWithQuery(nextQuery);
     }
   }
 
-  fetchWithQuery = searchQuery => {
-    if (searchQuery) {
+  fetchWithQuery = (query) => {
+    if (query) {
       services
-        .fetchMoviesWithQuery(searchQuery)
-        .then(res=> this.setState({filmList: res})
+        .fetchMoviesWithQuery(query)
+        .then(data=> this.setState({filmList: data})
         )
         .catch(error => console.log(error));
     }
   };
 
-  handleSearch = searchQuery => {
+  handleSearch = (searchQuery) => {
     this.props.history.push({
       ...this.props.location,
-      search: `searchQuery=${searchQuery}`,
+      search: `query=${searchQuery}`,
     });
   };
 

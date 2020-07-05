@@ -2,9 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import routes from './routes';
 import Layout from "./components/layout/Layout"
-// import HomePage from "./pages/HomePage/HomePage"
-// import MoviesPage from './pages/MoviesPage/MoviesPage'
-// import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage'
+
 
 const AsyncHomePage = lazy(() => 
 import('./pages/HomePage/HomePage' /* webpackChunkName: "HomePage" */)

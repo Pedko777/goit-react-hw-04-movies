@@ -14,20 +14,20 @@ const fetchMoviesWithQuery = (searchQuery) => {
   );
 };
 
-const fetchMoviesDetails = (id) => {
-  return axios(`/movie/${id}?api_key=${apiKey}`).then(
+const fetchMoviesDetails = (movieId) => {
+  return axios(`/movie/${movieId}?api_key=${apiKey}`).then(
     response => response.data,
   );
 };
 
-const fetchMovieCast = id => {
-  return axios(`/movie/${id}/credits?api_key=${apiKey}`).then(
+const fetchMovieCast = (movieId) => {
+  return axios(`/movie/${movieId}/credits?api_key=${apiKey}`).then(
     response => response.data.cast,
   );
 };
 
-const fetchMovieReviews = id => {
-  return axios(`/movie/${id}/reviews?api_key=${apiKey}`).then(
+const fetchMovieReviews = (movieId) => {
+  return axios(`/movie/${movieId}/reviews?api_key=${apiKey}`).then(
     response => response.data.results,
   );
 };

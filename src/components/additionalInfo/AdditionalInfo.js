@@ -1,18 +1,18 @@
 import React from 'react';
-import searchQueryParams from '../../ui/searchQueryParams';
+import getQueryParams from '../../ui/getQueryParams';
 import routes from '../../routes';
 import { NavLink } from 'react-router-dom';
 import styles from './additionalInfo.module.css';
 
-const checkQuery = location => {
+const checkQuery = (location) => {
   location.state &&
     location.state.from &&
     location.state.from.search &&
-    searchQueryParams(location.state.from.search);
+    getQueryParams(location.state.from.search);
 };
 
 const AdditionalInfo = ({ match, location }) => {
-  const searchQuery = checkQuery(location);
+  const query = checkQuery(location);
 
   return (
     <div>
@@ -27,7 +27,7 @@ const AdditionalInfo = ({ match, location }) => {
                 location.state && location.state.from
                   ? location.state.from
                   : routes.home,
-              search: searchQuery ? searchQuery : '',
+              search: query ? query : '',
             },
           }}
         >
@@ -42,7 +42,7 @@ const AdditionalInfo = ({ match, location }) => {
                 location.state && location.state.from
                   ? location.state.from
                   : routes.home,
-              search: searchQuery ? searchQuery : '',
+              search: query ? query : '',
             },
           }}
         >

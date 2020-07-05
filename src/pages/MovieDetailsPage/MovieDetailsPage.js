@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import services from '../../services/services';
 import styles from './movieDetailsPage.module.css';
 import routes from '../../routes';
@@ -7,12 +7,12 @@ import MovieDetails from '../../components/movieDetails/MovieDetails';
 import AdditionalInfo from '../../components/additionalInfo/AdditionalInfo';
 
 const AsyncCast = lazy(() =>
-  import('../../components/cast/Cast' /* webpackChunkName: "CastSection" */),
+  import('../../components/cast/Cast' /* webpackChunkName: "Cast" */),
 );
 
 const AsyncReviews = lazy(() =>
   import(
-    '../../components/reviews/Reviews' /* webpackChunkName: "ReviewsSection" */
+    '../../components/reviews/Reviews' /* webpackChunkName: "Reviews" */
   ),
 );
 
@@ -31,18 +31,20 @@ class MovieDetailsPage extends Component {
   }
 
   handleGoBack = () => {
-    const { location, history } = this.props;
+    const {
+      location: { state },
+      history,
+    } = this.props;
+    if (state && state.from) {
+      return history.push(state.from);
+    }
 
-    if (location.state && location.state.from) {
-        return history.push(location.state.from);
-      }
-  
-      history.push(routes.home);
+   history.push(routes.movies);
   };
 
   render() {
-      const { movie } = this.state;
-      const { match, location } = this.props;
+    const { movie } = this.state;
+    const { match, location } = this.props;
     return (
       <div className={styles.containerMovieDetails}>
         <button onClick={this.handleGoBack}>Go back</button>
@@ -53,8 +55,10 @@ class MovieDetailsPage extends Component {
           </>
         )}
         <Suspense fallback={<h1>Loading...</h1>}>
-          <Route path={`${match.path}/cast`} component={AsyncCast} />
-          <Route path={`${match.path}/reviews`} component={AsyncReviews} />
+          <Switch>
+            <Route path={`${match.path}/cast`} component={AsyncCast} />
+            <Route path={`${match.path}/reviews`} component={AsyncReviews} />
+          </Switch>
         </Suspense>
       </div>
     );
